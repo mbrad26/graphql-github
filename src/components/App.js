@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
+
+import './App.css'
+import Form from './Form';
+import { axiosGitHubGraphQL } from '../api/api';
+import { GET_ORGANIZATION } from '../Queries/queries';
 
 const TITLE = 'React GraphQL GitHub Client';
 
 const App = () => {
 
-  const handleSubmit = () => null;
-  const handleChange = () => null;
+  console.log('APP');
+
+  const loadingData = useCallback(() => {
+    axiosGitHubGraphQL
+      .post('', { query: GET_ORGANIZATION })
+      .then(res => console.log(res));
+  }, []);
+
+  useEffect(() => {
+    loadingData()
+  }, [loadingData]);
 
   return (
     <div>
       <h1>{TITLE}</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='url'>
-          Show open issues for https://github.com/
-        </label>
-        <input
-          id='url'
-          type='text'
-          onChange={handleChange}
-        />
-      </form>
+      <Form />
+      <hr />
+      {/* Here comes the result! */}
     </div>
   );
 };

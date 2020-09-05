@@ -5,5 +5,23 @@ exports[`App renders snapshot 1`] = `
   <h1>
     React GraphQL GitHub Client
   </h1>
+  <form>
+    <label
+      for="url"
+    >
+      Show open issues for https://github.com/
+    </label>
+    <input
+      id="url"
+      type="text"
+      value="the-road-to-learn-react/the-road-to-learn-react"
+    />
+    <button
+      type="submit"
+    >
+      Search
+    </button>
+  </form>
+  <hr />
 </div>
 `;
