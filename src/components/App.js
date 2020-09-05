@@ -1,7 +1,8 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import './App.css'
 import Form from './Form';
+import Organization from './Organization';
 import { axiosGitHubGraphQL } from '../api/api';
 import { GET_ORGANIZATION } from '../Queries/queries';
 
@@ -11,10 +12,17 @@ const App = () => {
 
   console.log('APP');
 
+  const [organization, setOrganization] = useState();
+  const [errors, setErrors] = useState();
+
   const loadingData = useCallback(() => {
     axiosGitHubGraphQL
       .post('', { query: GET_ORGANIZATION })
-      .then(res => console.log(res));
+      .then(res => {
+        console.log(res);
+        setOrganization(res.data.data.organization);
+        setErrors(res.data.errors);
+      });
   }, []);
 
   useEffect(() => {
@@ -26,7 +34,10 @@ const App = () => {
       <h1>{TITLE}</h1>
       <Form />
       <hr />
-      {/* Here comes the result! */}
+      {organization
+        ? <Organization organization={organization} errors={errors}/>
+        : <p>Loading data ...</p>
+      }
     </div>
   );
 };
