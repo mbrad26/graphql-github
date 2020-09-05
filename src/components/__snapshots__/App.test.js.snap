@@ -23,5 +23,8 @@ exports[`App renders snapshot 1`] = `
     </button>
   </form>
   <hr />
+  <p>
+    Loading data ...
+  </p>
 </div>
 `;
