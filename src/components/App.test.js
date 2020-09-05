@@ -4,10 +4,10 @@ import App from './App.js';
 
 describe('App', () => {
   it('renders snapshot', () =>{
-    render(<App />);
+    const { container } = render(<App />);
 
     screen.debug();
 
-    expect(screen.getByText('React GraphQL GitHub Client')).toBeInTheDocument();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

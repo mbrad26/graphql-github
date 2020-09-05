@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App renders snapshot 1`] = `null`;
+exports[`App renders snapshot 1`] = `
+<div>
+  <h1>
+    React GraphQL GitHub Client
+  </h1>
+</div>
+`;
