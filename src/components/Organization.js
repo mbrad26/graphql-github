@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Repository from './Repository';
+
 const Organization = ({ organization, errors }) => (
   <div>
     {errors
@@ -7,10 +9,15 @@ const Organization = ({ organization, errors }) => (
           <strong>Something went wrong: </strong>
           {errors.map(error => error.message).join(' ')}
         </p>
-      : <p>
-          <strong>Issues from Organization: </strong>
-          <a href={organization.url}>{organization.name}</a>
-        </p>
+      : <div>
+          <p>
+            <strong>Issues from Organization: </strong>
+            <a href={organization.url} target='_blank' rel='noopener noreferrer'>
+              {organization.name}
+            </a>
+          </p>
+          <Repository repository={organization.repository} />
+        </div>
     }
   </div>
 );

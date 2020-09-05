@@ -4,7 +4,9 @@ import './App.css'
 import Form from './Form';
 import Organization from './Organization';
 import { axiosGitHubGraphQL } from '../api/api';
-import { GET_ORGANIZATION } from '../Queries/queries';
+import {
+  GET_REPOSITORY_OF_ORGANIZATION,
+ } from '../Queries/queries';
 
 const TITLE = 'React GraphQL GitHub Client';
 
@@ -17,7 +19,7 @@ const App = () => {
 
   const loadingData = useCallback(() => {
     axiosGitHubGraphQL
-      .post('', { query: GET_ORGANIZATION })
+      .post('', { query: GET_REPOSITORY_OF_ORGANIZATION })
       .then(res => {
         console.log(res);
         setOrganization(res.data.data.organization);
