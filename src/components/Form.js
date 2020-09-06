@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Form = () => {
+const Form = ({ path, setPath, loadingData }) => {
 
   console.log('FILTER');
 
-  const [path, setPath] = useState('the-road-to-learn-react/the-road-to-learn-react');
+  // const [path, setPath] = useState('the-road-to-learn-react/the-road-to-learn-react');
 
   const handleSubmit = e => {
     e.preventDefault();
+    loadingData(path);
   };
 
   const handleChange = e => setPath(e.target.value);

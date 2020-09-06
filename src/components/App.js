@@ -3,9 +3,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './App.css'
 import Form from './Form';
 import Organization from './Organization';
-import { axiosGitHubGraphQL } from '../api/api';
+import { getIssuesOfRepository } from '../api/api';
 import {
-  GET_ISSUES_OF_REPOSITORY,
+  getIssuesOfRepositoryQuery,
  } from '../Queries/queries';
 
 const TITLE = 'React GraphQL GitHub Client';
@@ -16,11 +16,10 @@ const App = () => {
 
   const [organization, setOrganization] = useState();
   const [errors, setErrors] = useState();
+  const [path, setPath] = useState('the-road-to-learn-react/the-road-to-learn-react');
 
-  const loadingData = useCallback(() => {
-    axiosGitHubGraphQL
-      .post('', { query: GET_ISSUES_OF_REPOSITORY })
-      .then(res => {
+  const loadingData = useCallback((path) => {
+    getIssuesOfRepository(path).then(res => {
         console.log(res);
         setOrganization(res.data.data.organization);
         setErrors(res.data.errors);
@@ -28,13 +27,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    loadingData()
-  }, [loadingData]);
+    loadingData(path)
+  }, [path, loadingData]);
 
   return (
     <div>
       <h1>{TITLE}</h1>
-      <Form />
+      <Form path={path} setPath={setPath} loadingData={loadingData}/>
       <hr />
       {organization
         ? <Organization organization={organization} errors={errors}/>
