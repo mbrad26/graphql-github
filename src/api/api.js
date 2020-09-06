@@ -11,12 +11,12 @@ export const axiosGitHubGraphQL = axios.create({
   },
 });
 
-export const getIssuesOfRepository = path => {
+export const getIssuesOfRepository = (path, cursor) => {
   const [organization, repository] = path.split('/');
 
   return axiosGitHubGraphQL.post('',
     {
       query: GET_ISSUES_OF_REPOSITORY,
-      variables: { organization, repository },
+      variables: { organization, repository, cursor },
     });
 }
