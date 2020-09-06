@@ -3,7 +3,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './App.css'
 import Form from './Form';
 import Organization from './Organization';
-import { getIssuesOfRepository } from '../api/api';
+import {
+  getIssuesOfRepository,
+  addStarrToRepository,
+ } from '../api/api';
 
 const TITLE = 'React GraphQL GitHub Client';
 
@@ -14,6 +17,7 @@ const App = () => {
   const [organization, setOrganization] = useState();
   const [errors, setErrors] = useState();
   const [path, setPath] = useState('the-road-to-learn-react/the-road-to-learn-react');
+  const [star, setStar] = useState();
 
   const loadingData = useCallback((path, cursor) => {
     getIssuesOfRepository(path, cursor).then(res => {
@@ -27,6 +31,16 @@ const App = () => {
     const { endCursor } = organization.repository.issues.pageInfo;
 
     loadingData(path, endCursor);
+  };
+
+  const resolveAddStarMutation = mutationResult => {
+
+  };
+
+  const onStarRepository = (repositoryId, viewerHasStarred) => {
+    addStarrToRepository(repositoryId).then(mutationResult =>
+      setStar(mutationResult),
+    );
   };
 
   useEffect(() => {
@@ -43,6 +57,7 @@ const App = () => {
             organization={organization}
             errors={errors}
             onFetchMoreIssues={onFetchMoreIssues}
+            onStarRepository={onStarRepository}
           />
         : <p>Loading data ...</p>
       }

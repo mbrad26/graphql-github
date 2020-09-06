@@ -48,8 +48,10 @@ export const GET_ISSUES_OF_REPOSITORY = `
       name
       url
       repository(name: $repository) {
+        id
         name
         url
+        viewerHasStarred
         issues(first: 5, after: $cursor, states: [OPEN]) {
           edges {
             node {
@@ -72,6 +74,16 @@ export const GET_ISSUES_OF_REPOSITORY = `
             hasNextPage
           }
         }
+      }
+    }
+  }
+`;
+
+export const ADD_STAR = `
+  mutation ($repositoryId: ID!) {
+    addStar(input: {starrableId: $repositoryId}) {
+      starrable {
+        viewerHasStarred
       }
     }
   }

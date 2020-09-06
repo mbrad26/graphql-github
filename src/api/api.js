@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ADD_STAR } from '../Queries/queries';
 
 import {
   GET_ISSUES_OF_REPOSITORY,
@@ -19,4 +20,11 @@ export const getIssuesOfRepository = (path, cursor) => {
       query: GET_ISSUES_OF_REPOSITORY,
       variables: { organization, repository, cursor },
     });
-}
+};
+
+export const addStarrToRepository = repositoryId => {
+  return axiosGitHubGraphQL.post('', {
+    query: ADD_STAR,
+    variables: { repositoryId },
+  });
+};
