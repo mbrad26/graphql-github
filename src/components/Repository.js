@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Issues from './Issues';
+
 const Repository = ({ repository }) =>
   <div>
     <p>
@@ -8,6 +10,7 @@ const Repository = ({ repository }) =>
         {repository.name}
       </a>
     </p>
+    <Issues issues={repository.issues} />
   </div>
 
 export default Repository;

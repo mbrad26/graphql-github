@@ -1,3 +1,7 @@
+body {
+  padding: 50px;
+}
+
 #url {
   width: 300px;
 }
