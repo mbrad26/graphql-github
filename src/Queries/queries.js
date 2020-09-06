@@ -43,7 +43,11 @@ export const getIssuesOfRepositoryQuery = (organization, repository) => `
 `;
 
 export const GET_ISSUES_OF_REPOSITORY = `
-  query ($organization: String!, $repository: String!, $cursor: String) {
+  query (
+    $organization: String!,
+    $repository: String!,
+    $cursor: String
+  ) {
     organization(login: $organization) {
       name
       url
@@ -51,6 +55,9 @@ export const GET_ISSUES_OF_REPOSITORY = `
         id
         name
         url
+        stargazers {
+          totalCount
+        }
         viewerHasStarred
         issues(first: 5, after: $cursor, states: [OPEN]) {
           edges {
